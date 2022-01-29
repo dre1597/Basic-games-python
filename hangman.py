@@ -1,13 +1,15 @@
-import random 
+import random
+
 
 def welcome_message():
-    print('*********************')
-    print('*Welcome to hangman!*')
-    print('*********************')
+    print("*********************")
+    print("*Welcome to hangman!*")
+    print("*********************")
+
 
 def get_secret_word():
 
-    archive = open('words.txt', 'r')
+    archive = open("words.txt", "r")
     words = []
     for line in archive:
         line = line.strip()
@@ -20,13 +22,16 @@ def get_secret_word():
 
     return secret_word
 
+
 def get_mask(secret_word):
-    return ['_' for letter in secret_word]
+    return ["_" for letter in secret_word]
+
 
 def get_guess():
-    guess = input('What letter do you want? ')
+    guess = input("What letter do you want? ")
     guess = guess.strip().upper()
     return guess
+
 
 def verify_guess(secret_word, guess, mask):
     index = 0
@@ -35,11 +40,14 @@ def verify_guess(secret_word, guess, mask):
             mask[index] = letter
         index += 1
 
+
 def won_message(number_of_tries):
-    print(f'You won in {number_of_tries} tries!')
+    print(f"You won in {number_of_tries} tries!")
+
 
 def lose_message(secret_word):
     print(f"You lose! The secret word was {secret_word}")
+
 
 def play():
     welcome_message()
@@ -62,18 +70,19 @@ def play():
         else:
             errors += 1
             if (6 - errors) == 0:
-                print(f'That is your last try!')
+                print(f"That is your last try!")
             else:
-                print(f'You are wrong! You have more {6 - errors} tries!')
+                print(f"You are wrong! You have more {6 - errors} tries!")
         lose = errors == 6
-        won = '_' not in mask
+        won = "_" not in mask
 
         print(mask)
 
-        if won: 
+        if won:
             won_message(6 - errors)
         if lose:
             lose_message(secret_word)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     play()
